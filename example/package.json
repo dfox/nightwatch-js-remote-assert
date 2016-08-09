@@ -1,0 +1,16 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "An example note-taking application to demonstrate remote assertions",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cors": "^2.7.1",
+    "express": "^4.14.0",
+    "jquery": "^3.1.0"
+  }
+}
