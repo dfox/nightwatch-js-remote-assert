@@ -3,7 +3,7 @@ exports.assertion = function(grouping, name, msg) {
     const http = require('http'); 
     const util = require('util');
     
-    const MSG_PREFIX = 'Testing remote assertion %s: %s'
+    const MSG_PREFIX = 'Testing remote assertion: %s: %s'
     
     const MSG_ASSERTION_FAILED = (msg || util.format(MSG_PREFIX, grouping, name))
           + ': The following remote test(s) failed:\n';
@@ -15,7 +15,7 @@ exports.assertion = function(grouping, name, msg) {
     };
     
     this.pass = function(result) {
-        return result.successful;
+        return result;
     };
     
     this.failure = function(result) {
