@@ -1,0 +1,18 @@
+{
+    "name": "nightwatch-js-remote-assert",
+    "version": "1.0.0",
+    "description": "A nightwatch plugin for remote assertions",
+    "dependencies": {
+        "nightwatch": "^0.9.6"
+    },
+    "devDependencies": {
+        "express": "^4.14.0",
+        "jquery": "^3.1.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cantinac/nightwatch-js-remote-assert.git"
+    },
+    "author": "David Fox",
+    "license": "Apache-2.0"
+}
