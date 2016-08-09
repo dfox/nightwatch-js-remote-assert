@@ -2,7 +2,7 @@ const fixtures = require("../fixture.js");
 
 module.exports = {
   'Example test' : function (browser) {      
-      fixtures.load("note.jsons", function(note){
+      fixtures.load("note.json", function(note){
           browser
               .url('http://localhost:8082')
               .waitForElementVisible('body', 1000)
