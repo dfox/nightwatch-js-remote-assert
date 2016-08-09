@@ -15,8 +15,6 @@ $(function(){
         $.ajax({
             url: url,
             method: "GET",
-            dataType: "text",
-            global: false,
             success: function(content){
                 contentInput.val(content);
                 statusContainer.text("Loaded note: " + name);
