@@ -32,9 +32,16 @@
         "browserName": "firefox",
         "javascriptEnabled": true,
         "acceptSslCerts": true
+      },
+      "remoteAssertions": {
+        "host": "localhost",
+        "port": 8081,
+        "basePath": "/tests",
+        "fixtures": {
+          "basePath": "/fixtures"
+        }
       }
     },
-
     "chrome" : {
       "desiredCapabilities": {
         "browserName": "chrome",

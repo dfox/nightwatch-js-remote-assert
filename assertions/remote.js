@@ -1,7 +1,9 @@
 exports.assertion = function(grouping, name, msg) {
-
+    
     const http = require('http'); 
     const util = require('util');
+
+    const options = this.client.options.remoteAssertions;
     
     const MSG_PREFIX = 'Testing remote assertion: %s: %s'
     
@@ -38,7 +40,7 @@ exports.assertion = function(grouping, name, msg) {
         };
 
         if (!result.successful) {
-            this.message = result.results.reduce(function(acc, result){
+            this.message = result.results.reduce((acc, result) => {
                 if (result.successful){
                     return acc;
                 }
@@ -61,17 +63,17 @@ exports.assertion = function(grouping, name, msg) {
     this.command = function(callback) {
         var result = "";
         
-        const options = {
-            host: 'localhost',
-            port: 8081,
-            path: '/tests/' + grouping + "/" + name,
+        const httpOptions = {
+            host: options.host,
+            port: options.port,
+            path: options.basePath + "/" + grouping + "/" + name,
             method: 'POST'
         };
 
-        const req = http.request(options, function(res) {            
+        const req = http.request(httpOptions, (res) => {            
             res.setEncoding('utf8');
             
-            res.on('data', function (chunk) {
+            res.on('data', (chunk) => {
                 result += chunk;
             });
 
