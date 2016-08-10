@@ -68,7 +68,8 @@ exports.assertion = function(grouping, name, message) {
     };
     
     this.command = function(callback) {
-        let result = '';
+
+        const chunks = [];
         
         const httpOptions = {
             host: options.host,
@@ -77,22 +78,32 @@ exports.assertion = function(grouping, name, message) {
             method: 'POST'
         };
 
-        const request = http.request(httpOptions, (response) => {            
-            response.setEncoding('utf8');
-            
-            response.on('data', (chunk) => {
-                result += chunk;
-            });
-
-            response.on('end', () => {
-                callback(JSON.parse(result));
-            });
+        const request = http.request(httpOptions, (response) => {
+            if (response.statusCode == 200) {
+                response.setEncoding('utf8');
+                
+                response.on('data', (chunk) => {
+                    chunks.push(chunk);
+                });
+                
+                response.on('end', () => {
+                    const body = chunks.join("");
+                    const json = JSON.parse(body);
+                    callback(json);
+                });
+            }
+            else {
+                throw Error("Error running remote assertion: '"
+                            + response.statusMessage);
+            }
         });
 
         request.on('error', (e) => {
-            console.log('Problem with request: ' + e.message);
+            if (e.code != 'ECONNRESET') {
+                console.log('Problem running remote assertion: ' + e.message);
+            }
         });
-
+        
         request.end();
 
         return this;

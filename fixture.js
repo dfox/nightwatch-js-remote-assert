@@ -12,7 +12,7 @@ module.exports = {
             return callback(this.fixtures[path]);
         }
         else {
-            var result = '';
+            const chunks = [];
             
             const options = {
                 host: 'localhost',
@@ -21,30 +21,33 @@ module.exports = {
                 method: 'GET'
             };
             
-            const req = http.request(options, function(res) {
-                if (res.statusCode == 200) {                
-                    res.setEncoding('utf8');
+            const request = http.request(options, function(response) {
+                if (response.statusCode == 200) {                
+                    response.setEncoding('utf8');
                     
-                    res.on('data', function (chunk) {
-                        result += chunk;
+                    response.on('data', function (chunk) {
+                        chunks.push(chunk);
                     });
                     
-                    res.on('end', () => {
-                        self.fixtures[path] = JSON.parse(result)
+                    response.on('end', () => {
+                        const body = chunks.join("");
+                        self.fixtures[path] = JSON.parse(body);
                         callback(self.fixtures[path]);
                     });
                 }
                 else {
                     throw Error("Error loading fixture: '"
-                                + path + "': " + res.statusMessage);
+                                + path + "': " + response.statusMessage);
                 }
             });
             
-            req.on('error', (e) => {
-                console.log('Problem with fixture: ' + e.message);
+            request.on('error', (e) => {
+                if (e.code != 'ECONNRESET') {
+                    console.log('Problem loading fixture: ' + e.message);
+                }
             });
             
-            req.end();
+            request.end();
         }
     }
 };
