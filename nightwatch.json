@@ -36,10 +36,6 @@
       "remoteAssertions": {
         "host": "localhost",
         "port": 8081,
-        "basePath": "/tests",
-        "fixtures": {
-          "basePath": "/fixtures"
-        }
       }
     },
     "chrome" : {

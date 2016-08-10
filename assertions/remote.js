@@ -1,23 +1,26 @@
-exports.assertion = function(grouping, name, msg) {
-    
-    const http = require('http'); 
-    const util = require('util');
+const http = require('http'); 
+const util = require('util');
+
+exports.assertion = function(grouping, name, message) {
+
+    const BASE_PATH = "/tests/";
+    const DEFAULT_MESSAGE_PREFIX = 'Testing remote assertion: %s: %s';
+    const ASSERTION_FAILED_MESSAGE = 'The following remote test(s) failed:\n';
 
     const options = this.client.options.remoteAssertions;
+
+    const formatMessagePrefix = () => {
+        return message || util.format(DEFAULT_MESSAGE_PREFIX, grouping, name);
+    }
     
-    const MSG_PREFIX = 'Testing remote assertion: %s: %s'
-    
-    const MSG_ASSERTION_FAILED = (msg || util.format(MSG_PREFIX, grouping, name))
-          + ': The following remote test(s) failed:\n';
-    
-    this.message = msg || util.format(MSG_PREFIX, grouping, name);
+    this.message = formatMessagePrefix()
     
     this.expected = function() {
         return true;
     };
     
-    this.pass = function(result) {
-        return result;
+    this.pass = function(value) {
+        return value;
     };
     
     this.failure = function(result) {
@@ -39,6 +42,10 @@ exports.assertion = function(grouping, name, msg) {
             return "     Trace: \n       " + result.trace.join("\n       ");
         };
 
+        const formatAssertionFailed = () => {
+            return formatMessagePrefix() + ": " + ASSERTION_FAILED_MESSAGE
+        }
+
         if (!result.successful) {
             this.message = result.results.reduce((acc, result) => {
                 if (result.successful){
@@ -51,7 +58,7 @@ exports.assertion = function(grouping, name, msg) {
                         formatError(result) + 
                         formatTrace(result);
                 }
-            }, MSG_ASSERTION_FAILED);
+            }, formatAssertionFailed());
         }
         return !result.successful;
     };
@@ -61,32 +68,32 @@ exports.assertion = function(grouping, name, msg) {
     };
     
     this.command = function(callback) {
-        var result = "";
+        let result = '';
         
         const httpOptions = {
             host: options.host,
             port: options.port,
-            path: options.basePath + "/" + grouping + "/" + name,
+            path: BASE_PATH + '/' + grouping + '/' + name,
             method: 'POST'
         };
 
-        const req = http.request(httpOptions, (res) => {            
-            res.setEncoding('utf8');
+        const request = http.request(httpOptions, (response) => {            
+            response.setEncoding('utf8');
             
-            res.on('data', (chunk) => {
+            response.on('data', (chunk) => {
                 result += chunk;
             });
 
-            res.on('end', () => {
+            response.on('end', () => {
                 callback(JSON.parse(result));
             });
         });
 
-        req.on('error', (e) => {
-            console.log("Problem with request: " + e.message);
+        request.on('error', (e) => {
+            console.log('Problem with request: ' + e.message);
         });
 
-        req.end();
+        request.end();
 
         return this;
     };

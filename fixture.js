@@ -41,7 +41,7 @@ module.exports = {
             });
             
             req.on('error', (e) => {
-                console.log('Problem with request: ' + e.message);
+                console.log('Problem with fixture: ' + e.message);
             });
             
             req.end();
