@@ -34,8 +34,8 @@ exports.assertion = function(grouping, name, message) {
         };
 
         const formatError = (result) => {
-            const value = (result.error.value) ? ": " + result.error.value : "";
-            return util.format("     Error: %s %s\n", result.error.name, value);
+            const message = (result.error.message) ? ": " + result.error.message : "";
+            return util.format("     Error: %s %s\n", result.error.name, message);
         };
 
         const formatTrace = (result) => {
