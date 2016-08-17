@@ -20,11 +20,9 @@ This library is intended to work with a backend such as [JUnit HTTP](https://git
 The example Express appication (/example.js) serves up a simple frontend for the example API in the JUnit HTTP project. The test included in tests/example.js exercises that application and shows how to use the included test data module:
 
 ```javascript
-const testData = require('../test-data.js');
-
 module.exports = {
   'Notes can be saved' : function (browser) {
-      testData.load('notes.json', function(notes){
+      browser.loadTestData('notes.json', function(notes){
           browser
               .url('http://localhost:8082')
               .waitForElementVisible('body', 1000)
@@ -39,7 +37,7 @@ module.exports = {
   },
 
   'Notes can be loaded' : function (browser) {
-      testData.load('notes.json', function(notes){
+      browser.loadTestData('notes.json', function(notes){
           browser
               .url('http://localhost:8082')
               .waitForElementVisible('body', 1000)
@@ -54,16 +52,19 @@ module.exports = {
 };
 ```
 
-How does the assertion know where the test server is? There's a new configuration block you can add to the test settings in Nightwatch:
+How does the assertion know where the test server is? You need to add the following block to the "globals" section of the configuration, which can be changed per environment: 
 
 ```json
 "test_settings" : {
   "default" : {
-    "remoteAssertions": {
-      "host": "localhost",
-      "port": 8081
+    "globals":{
+        "remoteAssertions": {
+            "host": "localhost",
+            "port": 8081
+        }
     }
-  },
+  }
+}
 ```
 
 In order to execute a test on the backend, you simply specify it as another assertion using ```assert.remote```. If you read through the JUnit HTTP it should be obvious how this works. 
