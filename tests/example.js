@@ -1,8 +1,6 @@
-const testData = require('../test-data.js');
-
 module.exports = {
   'Notes can be saved' : function (browser) {
-      testData.load('notes.json', function(notes){
+      browser.loadTestData('notes.json', function(notes){
           browser
               .url('http://localhost:8082')
               .waitForElementVisible('body', 1000)
@@ -17,7 +15,7 @@ module.exports = {
   },
 
   'Notes can be loaded' : function (browser) {
-      testData.load('notes.json', function(notes){
+      browser.loadTestData('notes.json', function(notes){
           browser
               .url('http://localhost:8082')
               .waitForElementVisible('body', 1000)

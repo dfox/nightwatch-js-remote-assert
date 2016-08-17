@@ -6,8 +6,8 @@ exports.assertion = function(grouping, name, message) {
     const BASE_PATH = "/tests/";
     const DEFAULT_MESSAGE_PREFIX = 'Testing remote assertion: %s: %s';
     const ASSERTION_FAILED_MESSAGE = 'The following remote test(s) failed:\n';
-
-    const options = this.client.options.remoteAssertions;
+    
+    const options = this.globals.remoteAssertions;
 
     const formatMessagePrefix = () => {
         return message || util.format(DEFAULT_MESSAGE_PREFIX, grouping, name);
