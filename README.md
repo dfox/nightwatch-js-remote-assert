@@ -41,4 +41,16 @@ module.exports = {
 
 ```
 
+How does the assertion know where the test server is? There's a new configuration block you can add to the test settings in Nightwatch:
+
+```json
+"test_settings" : {
+  "default" : {
+    "remoteAssertions": {
+      "host": "localhost",
+      "port": 8081
+    }
+  },
+```
+
 In order to execute a test on the backend, you simply specify it as another assertion using ```assert.remote```. If you read through the JUnit HTTP it should be obvious how this works. 
