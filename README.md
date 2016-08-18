@@ -1,12 +1,12 @@
 # nightwatch-js-remote-assert
 
-A library which adds remote assertion to nightwatch
+A library which adds remote assertions, fixtures, and test data to [Nightwatch](http://nightwatchjs.org)
 
-## What
+## What?
 
 This library is intended to work with a backend such as [JUnit HTTP](https://github.com/cantinac/junit-http). Check out that project for the rationale and how to set up the server component.
 
-## How
+## How?
 
 * Clone the JUnit HTTP repository and run the example application and test servers
 * Clone this repo
