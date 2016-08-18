@@ -1,6 +1,7 @@
 const http = require('http');
 
-const BASE_PATH = "/data/";
+const BASE_PATH = '/data/';
+const ERROR_MESSAGE = 'Error loading test data: ';
 
 exports.command = function(path, callback) {
     var self = this;
@@ -32,20 +33,19 @@ exports.command = function(path, callback) {
                 });
                 
                 response.on('end', () => {
-                    const body = chunks.join("");
+                    const body = chunks.join('');
                     data[path] = JSON.parse(body);
                     callback.call(self, data[path]);
                 });
             }
             else {
-                throw Error("Error loading fixture: '"
-                            + path + "': " + response.statusMessage);
+                throw Error(ERROR_MESSAGE + ": '" + path + "': " + response.statusMessage);
             }
         });
         
         request.on('error', (e) => {
             if (e.code != 'ECONNRESET') {
-                console.log('Problem loading fixture: ' + e.message);
+                console.log(ERROR_MESSAGE + e.message);
             }
         });
         

@@ -1,11 +1,11 @@
 const http = require('http'); 
 const util = require('util');
 
-exports.assertion = function(grouping, name, message) {
+const BASE_PATH = "/tests/";
+const DEFAULT_MESSAGE_PREFIX = 'Testing remote assertion: %s: %s';
+const TEST_FAILED_MESSAGE = 'The following remote test(s) failed:\n';
 
-    const BASE_PATH = "/tests/";
-    const DEFAULT_MESSAGE_PREFIX = 'Testing remote assertion: %s: %s';
-    const ASSERTION_FAILED_MESSAGE = 'The following remote test(s) failed:\n';
+exports.assertion = function(grouping, name, message) {
     
     const options = this.globals.remoteAssertions;
 
@@ -42,8 +42,8 @@ exports.assertion = function(grouping, name, message) {
             return "     Trace: \n       " + result.trace.join("\n       ");
         };
 
-        const formatAssertionFailed = () => {
-            return formatMessagePrefix() + ": " + ASSERTION_FAILED_MESSAGE
+        const formatTestFailed = () => {
+            return formatMessagePrefix() + ": " + TEST_FAILED_MESSAGE
         }
 
         if (!result.successful) {
@@ -58,7 +58,7 @@ exports.assertion = function(grouping, name, message) {
                         formatError(result) + 
                         formatTrace(result);
                 }
-            }, formatAssertionFailed());
+            }, formatTestFailed());
         }
         return !result.successful;
     };
