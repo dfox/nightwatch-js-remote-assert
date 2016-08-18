@@ -11,6 +11,7 @@ This library is intended to work with a backend such as [JUnit HTTP](https://git
 * Clone the JUnit HTTP repository and run the example application and test servers
 * Clone this repo
 * Run ```npm install```
+* Download and run the standalone [Selenium client](http://selenium-release.storage.googleapis.com/index.html) according to the instructions on the [Nightwatch site](http://nightwatchjs.org/guide)
 * Run ```node example.js```
 * Run ```nightwatch```
 * Check out the test output in the terminal
