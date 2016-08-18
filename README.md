@@ -89,10 +89,12 @@ How does the assertion know where the test server is? You need to add the follow
 "test_settings" : {
   "default" : {
     "globals":{
-        "remoteAssertions": {
-            "host": "localhost",
-            "port": 8081
+      "remoteTest":{
+        "server":{
+          "host": "localhost",
+          "port": 8081
         }
+      }
     }
   }
 }
