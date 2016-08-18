@@ -9,7 +9,7 @@ const ERROR_MESSAGE = 'Error running remote assertion: ';
 
 exports.assertion = function(grouping, name, message) {
     
-  const options = this.globals.remoteAssertions;
+  const options = this.globals.remoteTest;
   
   const formatMessagePrefix = () => {
     return message || util.format(DEFAULT_MESSAGE_PREFIX, grouping, name);
@@ -42,8 +42,8 @@ exports.assertion = function(grouping, name, message) {
     const chunks = [];
     
     const httpOptions = {
-      host: options.host,
-      port: options.port,
+      host: options.server.host,
+      port: options.server.port,
       path: BASE_PATH + '/' + grouping + '/' + name,
       method: 'POST'
     };

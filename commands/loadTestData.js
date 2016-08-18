@@ -6,10 +6,10 @@ const ERROR_MESSAGE = 'Error loading test data: ';
 exports.command = function(path, callback) {
   var self = this;
   
-  this.globals.remoteTestData = this.globals.remoteTestData || {};
+  this.globals.remoteTest.data = this.globals.remoteTest.data || {};
   
-  const options = this.globals.remoteAssertions;
-  const data = this.globals.remoteTestData;
+  const options = this.globals.remoteTest;
+  const data = this.globals.remoteTest.data;
   
   if (data[path]) {
     return callback.call(this, data[path]);
@@ -18,8 +18,8 @@ exports.command = function(path, callback) {
     const chunks = [];
     
     const httpOptions = {
-      host: options.host,
-      port: options.port,
+      host: options.server.host,
+      port: options.server.port,
       path: BASE_PATH + '/' + path,
       method: 'GET'
     };

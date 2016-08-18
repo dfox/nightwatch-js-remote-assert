@@ -8,13 +8,13 @@ const FIXTURE_FAILED_MESSAGE = 'The following remote fixture(s) failed:\n';
 exports.command = function(grouping, name, callback) {
   var self = this;
   
-  const options = this.globals.remoteAssertions;
+  const options = this.globals.remoteTest;
   
   const chunks = [];
   
   const httpOptions = {
-    host: options.host,
-    port: options.port,
+    host: options.server.host,
+    port: options.server.port,
     path: BASE_PATH + '/' + grouping + '/' + name,
     method: 'POST'
   };
@@ -34,12 +34,14 @@ exports.command = function(grouping, name, callback) {
           callback();
         }
         else {
-          throw Error(format.results(FIXTURE_FAILED_MESSAGE, json.results))
+          console.log(format.results(FIXTURE_FAILED_MESSAGE, json.results))
+          throw Error(ERROR_MESSAGE + ": " + grouping + ": " + name)
         }
       });
     }
     else {
-      throw Error(ERROR_MESSAGE + ": '" + path + "': " + response.statusMessage);
+      throw Error(ERROR_MESSAGE + ": " + grouping + ": " + name + ": "
+                  + response.statusMessage);
     }
   });
   

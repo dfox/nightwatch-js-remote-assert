@@ -16,13 +16,15 @@
       "webdriver.ie.driver" : ""
     }
   },
-
+  
   "test_settings" : {
     "default" : {
       "launch_url" : "http://localhost",
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
+      "end_session_on_fail": false,
+      "skip_testcases_on_fail": false,
       "screenshots" : {
         "enabled" : false,
         "path" : ""
@@ -33,10 +35,12 @@
         "acceptSslCerts": true
       },
       "globals":{
-          "remoteAssertions": {
-              "host": "localhost",
-              "port": 8081
+        "remoteTest":{
+          "server":{
+            "host": "localhost",
+            "port": 8081
           }
+        }
       }
     },
     "chrome" : {

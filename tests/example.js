@@ -62,5 +62,11 @@ module.exports = {
     browser
       .assert.remote(REMOTE_TEST_GROUP, 'failedAssertion')
       .end();
+  },
+
+  'Remote fixture should fail' : browser => {
+    browser
+      .remoteFixture(REMOTE_TEST_GROUP, 'throwException')
+      .end();
   }
 };
