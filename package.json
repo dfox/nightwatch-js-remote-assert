@@ -1,11 +1,13 @@
 {
-  "name": "nightwatch-js-remote-assert",
+  "name": "@cantina/nightwatch-js-remote-assert",
   "version": "1.0.0",
   "description": "A nightwatch plugin for remote assertions",
   "dependencies": {
     "nightwatch": "^0.9.6"
   },
   "devDependencies": {
+    "@neogeek/eslint-config-standards": "^1.0.0",
+    "eslint": "^3.3.1",
     "express": "^4.14.0",
     "jquery": "^3.1.0"
   },
