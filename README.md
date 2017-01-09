@@ -4,7 +4,7 @@ A library which adds remote assertions, fixtures, and test data to [Nightwatch](
 
 ## What?
 
-This library is intended to work with a backend such as [JUnit HTTP](https://github.com/cantinac/junit-http). Check out that project for the rationale and how to set up the server component.
+This library is intended to work with a backend such as [JUnit HTTP](https://github.com/dfox/junit-http). Check out that project for the rationale and how to set up the server component.
 
 ## How?
 
@@ -22,7 +22,7 @@ _Note:_ You'll need to put Chromedriver and the Selenium standalone server jar i
 
 ## Example
 
-The example Express application (`/example.js`) serves up a simple front end for the example API in the JUnit HTTP project. The test included in `tests/example.js` exercises that application and shows how to use the included "assert.remote", "loadTestData", and "remoteFixture" functions work. For more information about how these work and why you want to use them, see the documentation for the backend at [JUnit HTTP](https://github.com/cantinac/junit-http).
+The example Express application (`/example.js`) serves up a simple front end for the example API in the JUnit HTTP project. The test included in `tests/example.js` exercises that application and shows how to use the included "assert.remote", "loadTestData", and "remoteFixture" functions work. For more information about how these work and why you want to use them, see the documentation for the backend at [JUnit HTTP](https://github.com/dfox/junit-http).
 
 ```javascript
 const URL = 'http://localhost:8082'
@@ -31,7 +31,7 @@ const CONTENT_INPUT = 'textarea[id=note-content]'
 const SAVE_BUTTON = 'button[id=save-button]'
 const LOAD_BUTTON = 'button[id=load-button]'
 const STATUS_ELEMENT = '#status'
-const REMOTE_TEST_GROUP = 'co.cantina.junit.http.example.ExampleTest'
+const REMOTE_TEST_GROUP = 'io.dfox.junit.http.example.ExampleTest'
 const TEST_DATA = 'notes.json'
 
 module.exports = {

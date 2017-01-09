@@ -4,7 +4,7 @@ const CONTENT_INPUT = 'textarea[id=note-content]';
 const SAVE_BUTTON = 'button[id=save-button]';
 const LOAD_BUTTON = 'button[id=load-button]';
 const STATUS_ELEMENT = '#status';
-const REMOTE_TEST_GROUP = 'co.cantina.junit.http.example.ExampleTest';
+const REMOTE_TEST_GROUP = 'io.dfox.junit.http.example.ExampleTest';
 const TEST_DATA = 'notes.json';
 const PAUSE = 1000;
 

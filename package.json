@@ -1,5 +1,5 @@
 {
-  "name": "@cantina/nightwatch-js-remote-assert",
+  "name": "@dfox/nightwatch-js-remote-assert",
   "version": "1.0.0",
   "description": "A nightwatch plugin for remote assertions",
   "dependencies": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cantinac/nightwatch-js-remote-assert.git"
+    "url": "git+https://github.com/dfox/nightwatch-js-remote-assert.git"
   },
   "author": "David Fox",
   "license": "Apache-2.0"
