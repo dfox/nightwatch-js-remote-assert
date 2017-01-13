@@ -2,6 +2,8 @@
 
 A library which adds remote assertions, fixtures, and test data to [Nightwatch](http://nightwatchjs.org)
 
+This library is part of the tools available on https://graybox-testing.org. See that site for more information.
+
 ## What?
 
 This library is intended to work with a backend such as [JUnit HTTP](https://github.com/dfox/junit-http). Check out that project for the rationale and how to set up the server component.
